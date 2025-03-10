@@ -1,11 +1,15 @@
 import toast from "react-hot-toast";
 import s from "./SearchBar.module.css";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
-const SearchBar = ({ onSubmit }) => {
-  const [value, setValue] = useState("");
+interface SearchBarProps {
+  onSubmit: (value: string) => void;
+}
 
-  const handleSubmit = (e) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
+  const [value, setValue] = useState<string>("");
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!value) {
       toast.error("Please enter a query to search for images.");

@@ -8,17 +8,18 @@ import { Toaster } from "react-hot-toast";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
 import Modal from "react-modal";
+import { ImageItem } from "./components/ImageCard/ImageCard";
 
 Modal.setAppElement("#root");
 
 const App = () => {
-  const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [chooseImage, setChooseImage] = useState("");
+  const [articles, setArticles] = useState<ImageItem[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [chooseImage, setChooseImage] = useState<string>("");
 
   useEffect(() => {
     const getData = async () => {
@@ -37,7 +38,7 @@ const App = () => {
     getData();
   }, [query, page]);
 
-  const handleSetQuery = (newQuery) => {
+  const handleSetQuery = (newQuery: string): void => {
     setQuery(newQuery);
     setArticles([]);
     setPage(1);
@@ -47,7 +48,7 @@ const App = () => {
     setPage((prev) => prev + 1);
   };
 
-  const handleOpenModal = (image) => {
+  const handleOpenModal = (image: string): void => {
     setChooseImage(image);
     setModalIsOpen(true);
   };
